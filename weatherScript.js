@@ -1,5 +1,7 @@
 $(document).ready(function() {//dont forget this cause it will ruin your day
 
+  //this here below is so important doesnt work if you have 
+  //.list-group-items and no li as a second parameter WHY!?
    $(".list-group").on("click", "li", function(event){
      //when they click on a past ietm load it up baby!
      //why does this not work for newly added rows... is it val or what 
