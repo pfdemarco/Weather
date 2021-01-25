@@ -1,16 +1,21 @@
 $(document).ready(function() {//dont forget this cause it will ruin your day
 
-  $(".list-group-item").on("click", function(){
-    //when they click on a past ietm load it up baby!
-    $("#search-input").val($(this).text());//set the val of search area
-    getWeather();
-  });
+   $(".list-group").on("click", "li", function(event){
+     //when they click on a past ietm load it up baby!
+     //why does this not work for newly added rows... is it val or what 
+     console.log(event);
+     $("#search-input").val($(this).text());//set the val of search area
+     getWeather();//update with this city
+   });
+
+  
+
 
   $("#search-button").on("click", function(Event){
     var tagit = $("<li>");//create a li item
 
-    tagit.attr("class", "list-group-item");
-    
+    //tagit.attr("class", "list-group-item");
+    tagit.addClass("list-group-item");
     var t = $("#search-input").val();
 
     tagit.text(t);
