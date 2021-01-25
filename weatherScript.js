@@ -1,17 +1,40 @@
 $(document).ready(function() {//dont forget this cause it will ruin your day
 
-  $(".butt").on("click", function(){
+  $("#search-button").on("click", function(Event){
     var tagit = $("<li>");//create a li item
 
     tagit.attr("class", "list-group-item");
-    tagit.text("city here");
-    $(".list-group").append(tagit).textContent("uwsgiuregf");  //<li class="list-group-item">Boston</li>
+    
+    var t = $("#search-input").val();
+
+    tagit.text(t);
+
+    $(".list-group").append(tagit);  //<li class="list-group-item">Boston</li>
     console.log(tagit);
+
+    getWeather();
   });
 
-  $("#search-button").on("click", function(Event){
-    console.log(Event)
-  });
+  function getWeather(){
+    // Storing our giphy API URL for a random cat image
+  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=troy,ny,840&appid=ca623f88e9a094baf03a0e31d283744f";
+
+  //"https://api.openweathermap.org/data/2.5/onecall?lat=43.31&lon=4.59&exclude=hourly,daily&appid=ca623f88e9a094baf03a0e31d283744f";
+
+  // Perfoming an AJAX GET request to our queryURL
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+
+  // After the data from the AJAX request comes back
+    .then(function(response) {
+
+    // Saving the image_original_url property
+      console.log(response);
+    });
+  }
+  
 
 });
 
