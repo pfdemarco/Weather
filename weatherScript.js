@@ -39,10 +39,25 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       $("#temp").text("Temp: " + response.list[0].main.temp +"F");
       $("#humid").text("Humidity: " + response.list[0].main.humidity + "%");
       $("#wind").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
-      $("#uvi").text("UV Index: "  );
+      
+      const lati = response.city.coord.lat;
+      const long = response.city.coord.lon;
+      //now go get UV Index from the one call api using the vars above
+     
+     getUVI(lati, long);
+     
     });
   }
   
+  function getUVI(x,y){
+    $.ajax({
+      url:"https://api.openweathermap.org/data/2.5/onecall?lat=" + x + "&lon=" + y + "&exclude=hourly,daily&appid=ca623f88e9a094baf03a0e31d283744f",
+      method: "GET"
+    })
+      .then(function(response){
+        $("#uvi").text("UV Index: " + response.current.uvi); 
+      })
+  }
 });
 
 
