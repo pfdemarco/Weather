@@ -17,27 +17,48 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
 
   function getWeather(){
     // Storing our giphy API URL for a random cat image
-  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=troy,ny,840&appid=ca623f88e9a094baf03a0e31d283744f";
-//840 is usa https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+    var sIn = $("#search-input").val();
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + sIn + ",840&appid=ca623f88e9a094baf03a0e31d283744f&units=imperial";
+    //"https://api.openweathermap.org/data/2.5/forecast?q=troy,ny,840&appid=ca623f88e9a094baf03a0e31d283744f"
+    //840 is usa https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 
-  //"https://api.openweathermap.org/data/2.5/onecall?lat=43.31&lon=4.59&exclude=hourly,daily&appid=ca623f88e9a094baf03a0e31d283744f";
+    //"https://api.openweathermap.org/data/2.5/onecall?lat=43.31&lon=4.59&exclude=hourly,daily&appid=ca623f88e9a094baf03a0e31d283744f";
 
-  // Perfoming an AJAX GET request to our queryURL
-  $.ajax({
-    url: queryURL,
-    method: "GET"
+    // Perfoming an AJAX GET request to our queryURL
+    $.ajax({
+      url: queryURL,
+      method: "GET"
   })
-
   // After the data from the AJAX request comes back
     .then(function(response) {
-
     // Saving the image_original_url property
       console.log(response);
+      console.log(response.city.name);
+      //populate right side with teh json object returned
+      $("#cityDate").text(response.city.name + " its " + response.list[0].weather[0].description + "today.");
+      $("#temp").text("Temp: " + response.list[0].main.temp +"F");
+      $("#humid").text("Humidity: " + response.list[0].main.humidity + "%");
+      $("#wind").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
+      $("#uvi").text("UV Index: "  );
     });
   }
   
-
 });
+
+
+
+
+//<div id="cityDate"></div>
+//<div id="temp"></div>
+//<div id="humid"></div>
+//<div id="wind"></div>
+//<div id="uvi"></div>
+
+
+
+
+
+
 
 
 
@@ -74,5 +95,29 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
 
 
 
+// MAJOR TASK #2: ATTACH ON-CLICK EVENTS TO "LETTER" BUTTONS
+      // =================================================================================
+
+      // 7. Create an "on-click" event attached to the ".letter-button" class.
+      // $(".letter-button").on("click", function() {
+
+      //   // Inside the on-click event...
+
+      //   // 8. Create a variable called "fridgeMagnet" and set the variable equal to a new div.
+      //   var fridgeMagnet = $("<div>");
+
+      //   // 9. Give each "fridgeMagnet" the following classes: "letter fridge-color".
+      //   fridgeMagnet.addClass("letter fridge-color");
+
+      //   // 10. Then chain the following code onto the "fridgeMagnet" variable: .text($(this).attr("data-letter"))
+      //   // attr acts as both a setter and a getter for attributes depending on whether we supply one argument or two
+      //   // NOTE: There IS a $(data) jQuery method, but it doesn't do what you'd expect. So just use attr.
+      //   fridgeMagnet.text($(this).attr("data-letter"));
+
+      //   // 11. Lastly append the fridgeMagnet variable to the "#display" div (provided);
+      //   // Again you can see we use that find, and once its found we append the item
+      //   $("#display").append(fridgeMagnet);
+
+      // });
 
 
