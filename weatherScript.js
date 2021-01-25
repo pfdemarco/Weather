@@ -18,6 +18,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
   function getWeather(){
     // Storing our giphy API URL for a random cat image
   var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=troy,ny,840&appid=ca623f88e9a094baf03a0e31d283744f";
+//840 is usa https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 
   //"https://api.openweathermap.org/data/2.5/onecall?lat=43.31&lon=4.59&exclude=hourly,daily&appid=ca623f88e9a094baf03a0e31d283744f";
 
