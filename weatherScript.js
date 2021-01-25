@@ -11,7 +11,13 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
    });
 
   
-
+//the json return object has the following 
+//0 index = today
+//5 = noon next day
+//13 noon 2 days out
+//21 noon 3 days out
+//29 noon 4 days out 
+//37 noon 5th day out
 
   $("#search-button").on("click", function(Event){
     var tagit = $("<li>");//create a li item
@@ -29,7 +35,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
   });
 
   function getWeather(){
-    // Storing our giphy API URL for a random cat image
+    // get teh search text do some logic on this once it works and you have time
     var sIn = $("#search-input").val();
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + sIn + ",840&appid=ca623f88e9a094baf03a0e31d283744f&units=imperial";
     //"https://api.openweathermap.org/data/2.5/forecast?q=troy,ny,840&appid=ca623f88e9a094baf03a0e31d283744f"
@@ -37,14 +43,21 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
 
     //"https://api.openweathermap.org/data/2.5/onecall?lat=43.31&lon=4.59&exclude=hourly,daily&appid=ca623f88e9a094baf03a0e31d283744f";
 
-    // Perfoming an AJAX GET request to our queryURL
+    //get the url info
     $.ajax({
       url: queryURL,
       method: "GET"
   })
-  // After the data from the AJAX request comes back
+    //the json return object has the following 
+  //0 index = today
+  //5 = noon next day
+  //13 noon 2 days out
+  //21 noon 3 days out
+  //29 noon 4 days out 
+  //37 noon 5th day out
+  // response has all teh goodness in it
     .then(function(response) {
-    // Saving the image_original_url property
+    // log it to see whats in it
       console.log(response);
       console.log(response.city.name);
       //populate right side with teh json object returned
