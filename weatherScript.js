@@ -1,5 +1,11 @@
 $(document).ready(function() {//dont forget this cause it will ruin your day
 
+  $(".list-group-item").on("click", function(){
+    //when they click on a past ietm load it up baby!
+    $("#search-input").val($(this).text());//set the val of search area
+    getWeather();
+  });
+
   $("#search-button").on("click", function(Event){
     var tagit = $("<li>");//create a li item
 
@@ -35,7 +41,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       console.log(response);
       console.log(response.city.name);
       //populate right side with teh json object returned
-      $("#cityDate").text(response.city.name + " its " + response.list[0].weather[0].description + "today.");
+      $("#cityDate").text("Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
       $("#temp").text("Temp: " + response.list[0].main.temp +"F");
       $("#humid").text("Humidity: " + response.list[0].main.humidity + "%");
       $("#wind").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
@@ -55,6 +61,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       method: "GET"
     })
       .then(function(response){
+        console.log(response);
         $("#uvi").text("UV Index: " + response.current.uvi); 
       })
   }
