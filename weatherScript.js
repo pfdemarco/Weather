@@ -2,6 +2,10 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
 
   //this here below is so important doesnt work if you have 
   //.list-group-items and no li as a second parameter WHY!?
+  //event delegation 
+  //attach a click event listener to the list group 
+  //the function event wont fire unless you literally click on a li
+  //inputs and buttons only have val();!!!!.
    $(".list-group").on("click", "li", function(event){
      //when they click on a past ietm load it up baby!
      //why does this not work for newly added rows... is it val or what 
@@ -10,20 +14,20 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
      getWeather();//update with this city
    });
 
-  
-//the json return object has the following 
-//0 index = today
-//5 = noon next day
-//13 noon 2 days out
-//21 noon 3 days out
-//29 noon 4 days out 
-//37 noon 5th day out
+  //the json return object has the following 
+  //0 index = today
+  //5 = noon next day
+  //13 noon 2 days out
+  //21 noon 3 days out
+  //29 noon 4 days out 
+  //37 noon 5th day out
 
   $("#search-button").on("click", function(Event){
     var tagit = $("<li>");//create a li item
 
-    //tagit.attr("class", "list-group-item");
+    tagit.attr("class", "new-item");
     tagit.addClass("list-group-item");
+    
     var t = $("#search-input").val();
 
     tagit.text(t);
@@ -35,7 +39,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
   });
 
   function getWeather(){
-    // get teh search text do some logic on this once it works and you have time
+    // get the search text do some logic on this once it works and you have time
     var sIn = $("#search-input").val();
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + sIn + ",840&appid=ca623f88e9a094baf03a0e31d283744f&units=imperial";
     //"https://api.openweathermap.org/data/2.5/forecast?q=troy,ny,840&appid=ca623f88e9a094baf03a0e31d283744f"
@@ -49,17 +53,17 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       method: "GET"
   })
     //the json return object has the following 
-  //0 index = today
-  //5 = noon next day
-  //13 noon 2 days out
-  //21 noon 3 days out
-  //29 noon 4 days out 
-  //37 noon 5th day out
-  // response has all teh goodness in it
+    //0 index = today
+    //5 = noon next day
+    //13 noon 2 days out
+    //21 noon 3 days out
+    //29 noon 4 days out 
+    //37 noon 5th day out
+    // response has all the goodness in it
     .then(function(response) {
     // log it to see whats in it
-      console.log(response);
-      console.log(response.city.name);
+      //console.log(response);
+      //console.log(response.city.name);
       //populate right side with teh json object returned
       $("#cityDate").text("Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
       $("#temp").text("Temp: " + response.list[0].main.temp +"F");
@@ -69,7 +73,22 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       const lati = response.city.coord.lat;
       const long = response.city.coord.lon;
       //now go get UV Index from the one call api using the vars above
-     
+
+     let previousDay = "";
+
+     response.list.forEach((element) => {
+       //whats up with elemtn
+       const day = dayjs(element.dt_txt).format('dddd');
+       if (day != previousDay){
+        //get vals you need from element 
+        //only console day 1 each time the day changes...
+         console.log(day);
+         previousDay = day;
+       }
+       
+
+     });
+       
      getUVI(lati, long);
      
     });
@@ -87,22 +106,11 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
   }
 });
 
-
-
-
 //<div id="cityDate"></div>
 //<div id="temp"></div>
 //<div id="humid"></div>
 //<div id="wind"></div>
 //<div id="uvi"></div>
-
-
-
-
-
-
-
-
 
 
 // $("#cat-button").on("click", function() {
@@ -134,9 +142,6 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
 //     });
 // });
 
-
-
-
 // MAJOR TASK #2: ATTACH ON-CLICK EVENTS TO "LETTER" BUTTONS
       // =================================================================================
 
@@ -161,5 +166,3 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       //   $("#display").append(fridgeMagnet);
 
       // });
-
-
