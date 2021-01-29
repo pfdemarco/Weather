@@ -38,6 +38,13 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
     getWeather();
   });
 
+  function initThisShi(){
+    $("#cityDate").text(window.localStorage.getItem("desc"));
+    $("#temp").text(window.localStorage.getItem("Temp: "));
+    $("#humid").text(window.localStorage.getItem("Humidity: "));
+    $("#wind").text(window.localStorage.getItem("Wind Speed: "));
+  };
+
   function getWeather(){
     // get the search text do some logic on this once it works and you have time
     var sIn = $("#search-input").val();
@@ -66,10 +73,15 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       //console.log(response.city.name);
       //populate right side with teh json object returned
       $("#cityDate").text("Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
+      window.localStorage.setItem("desc" , "Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
       $("#temp").text("Temp: " + response.list[0].main.temp +"F");
+      window.localStorage.setItem("Temp: " , response.list[0].main.temp +"F");
       $("#humid").text("Humidity: " + response.list[0].main.humidity + "%");
+      window.localStorage.setItem("Humidity: " , response.list[0].main.humidity + "%");
       $("#wind").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
-      
+      window.localStorage.setItem("Wind Speed: " , response.list[0].wind.speed + "MPH");
+
+      console.log(response);
       const lati = response.city.coord.lat;
       const long = response.city.coord.lon;
       //now go get UV Index from the one call api using the vars above
@@ -86,7 +98,6 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
          previousDay = day;
        }
        
-
      });
        
      getUVI(lati, long);
@@ -100,10 +111,14 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       method: "GET"
     })
       .then(function(response){
-        //console.log(response);
+        console.log(response);
         $("#uvi").text("UV Index: " + response.current.uvi); 
       })
   }
+
+//maybe a long shit show of $() for recalling the curent and 5 day weather from local storage goes here.
+  initThisShi();
+
 });
 
 //<div id="cityDate"></div>
