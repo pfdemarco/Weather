@@ -9,7 +9,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
    $(".list-group").on("click", "li", function(event){
      //when they click on a past ietm load it up baby!
      //why does this not work for newly added rows... is it val or what 
-     console.log(event);
+     //console.log(event);
      $("#search-input").val($(this).text());//set the val of search area
      getWeather();//update with this city
    });
@@ -33,7 +33,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
     tagit.text(t);
 
     $(".list-group").append(tagit);  //<li class="list-group-item">Boston</li>
-    console.log(tagit);
+   // console.log(tagit);
 
     getWeather();
   });
@@ -100,7 +100,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       method: "GET"
     })
       .then(function(response){
-        console.log(response);
+        //console.log(response);
         $("#uvi").text("UV Index: " + response.current.uvi); 
       })
   }
