@@ -38,8 +38,9 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
     getWeather();
   });
 
-  function initThisShi(){
-    $("#cityDate").text(window.localStorage.getItem("desc"));
+  function initThis(){
+    getWeather();
+    $("#cityDate").text(window.localStorage.getItem("Descr"));
     $("#temp").text(window.localStorage.getItem("Temp: "));
     $("#humid").text(window.localStorage.getItem("Humidity: "));
     $("#wind").text(window.localStorage.getItem("Wind Speed: "));
@@ -49,23 +50,14 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
     // get the search text do some logic on this once it works and you have time
     var sIn = $("#search-input").val();
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + sIn + ",840&appid=ca623f88e9a094baf03a0e31d283744f&units=imperial";
-    //"https://api.openweathermap.org/data/2.5/forecast?q=troy,ny,840&appid=ca623f88e9a094baf03a0e31d283744f"
+    
     //840 is usa https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
-
-    //"https://api.openweathermap.org/data/2.5/onecall?lat=43.31&lon=4.59&exclude=hourly,daily&appid=ca623f88e9a094baf03a0e31d283744f";
-
     //get the url info
     $.ajax({
       url: queryURL,
       method: "GET"
   })
-    //the json return object has the following 
-    //0 index = today
-    //5 = noon next day
-    //13 noon 2 days out
-    //21 noon 3 days out
-    //29 noon 4 days out 
-    //37 noon 5th day out
+   
     // response has all the goodness in it
     .then(function(response) {
     // log it to see whats in it
@@ -73,7 +65,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       //console.log(response.city.name);
       //populate right side with teh json object returned
       $("#cityDate").text("Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
-      window.localStorage.setItem("desc" , "Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
+      window.localStorage.setItem("Descr" , "Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
       $("#temp").text("Temp: " + response.list[0].main.temp +"F");
       window.localStorage.setItem("Temp: " , "Temp: " + response.list[0].main.temp +"F");
       $("#humid").text("Humidity: " + response.list[0].main.humidity + "%");
@@ -117,9 +109,22 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
   }
 
 //maybe a long shit show of $() for recalling the curent and 5 day weather from local storage goes here.
-  initThisShi();
+  initThis();
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //<div id="cityDate"></div>
 //<div id="temp"></div>
