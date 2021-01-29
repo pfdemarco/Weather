@@ -75,11 +75,11 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       $("#cityDate").text("Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
       window.localStorage.setItem("desc" , "Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
       $("#temp").text("Temp: " + response.list[0].main.temp +"F");
-      window.localStorage.setItem("Temp: " , response.list[0].main.temp +"F");
+      window.localStorage.setItem("Temp: " , "Temp: " + response.list[0].main.temp +"F");
       $("#humid").text("Humidity: " + response.list[0].main.humidity + "%");
-      window.localStorage.setItem("Humidity: " , response.list[0].main.humidity + "%");
+      window.localStorage.setItem("Humidity: " , "Humidity: " + response.list[0].main.humidity + "%");
       $("#wind").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
-      window.localStorage.setItem("Wind Speed: " , response.list[0].wind.speed + "MPH");
+      window.localStorage.setItem("Wind Speed: " , "Wind Speed: " + response.list[0].wind.speed + "MPH");
 
       console.log(response);
       const lati = response.city.coord.lat;
