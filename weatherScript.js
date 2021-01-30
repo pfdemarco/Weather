@@ -57,7 +57,6 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
          previousDay = day;
         if (indexI  == 0){
           $(".card-text0").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
-          //http://openweathermap.org/img/wn/10d@2x.png
           var icoPresent = element.weather[0].icon;
           $(".card-img-top0").attr("src","http://openweathermap.org/img/wn/" + icoPresent + "@2x.png");
         }
@@ -102,7 +101,22 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
     })
       .then(function(response){
         //console.log(response);
+        //0-2 minimal
+        //3-4 low
+        //5-6 moderate
+        //7-9 high
+        //>=10 very high
+        var uvI = response.current.uvi;
         $("#uvi").text("UV Index: " + response.current.uvi); 
+        if (uvI >= 0 && uvI <= 4){
+          $("#uvi").css("color", "green");
+        }
+        else if (uvI >= 5 && uvI <= 6){
+          $("#uvi").css("color", "orange");
+        }
+        else if (uvI >= 7){
+          $("#uvi").css("color", "red");
+        }
       })
   }
 
