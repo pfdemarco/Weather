@@ -1,49 +1,14 @@
 $(document).ready(function() {//dont forget this cause it will ruin your day
 
-  //this here below is so important doesnt work if you have 
-  //.list-group-items and no li as a second parameter WHY!?
-  //event delegation 
-  //attach a click event listener to the list group 
-  //the function event wont fire unless you literally click on a li
-  //inputs and buttons only have val();!!!!.
-   $(".list-group").on("click", "li", function(event){
-     //when they click on a past ietm load it up baby!
-     //why does this not work for newly added rows... is it val or what 
-     //console.log(event);
-     $("#search-input").val($(this).text());//set the val of search area
-     getWeather();//update with this city
-   });
-
-  //the json return object has the following 
-  //0 index = today
-  //5 = noon next day
-  //13 noon 2 days out
-  //21 noon 3 days out
-  //29 noon 4 days out 
-  //37 noon 5th day out
-
-  $("#search-button").on("click", function(Event){
-    var tagit = $("<li>");//create a li item
-
-    tagit.attr("class", "new-item");
-    tagit.addClass("list-group-item");
-    
-    var t = $("#search-input").val();
-
-    tagit.text(t);
-
-    $(".list-group").append(tagit);  //<li class="list-group-item">Boston</li>
-   // console.log(tagit);
-
-    getWeather();
-  });
-
   function initThis(){
-    getWeather();
-    $("#cityDate").text(window.localStorage.getItem("Descr"));
-    $("#temp").text(window.localStorage.getItem("Temp: "));
-    $("#humid").text(window.localStorage.getItem("Humidity: "));
-    $("#wind").text(window.localStorage.getItem("Wind Speed: "));
+   // getWeather();
+   if (window.localStorage.length != 0){
+     $("#cityDate").text(window.localStorage.getItem("Descr"));
+     $("#temp").text(window.localStorage.getItem("Temp: "));
+     $("#humid").text(window.localStorage.getItem("Humidity: "));
+     $("#wind").text(window.localStorage.getItem("Wind Speed: "));
+   }
+    
   };
 
   function getWeather(){
@@ -73,23 +38,66 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       $("#wind").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
       window.localStorage.setItem("Wind Speed: " , "Wind Speed: " + response.list[0].wind.speed + "MPH");
 
-      console.log(response);
+     // console.log(response);
       const lati = response.city.coord.lat;
       const long = response.city.coord.lon;
       //now go get UV Index from the one call api using the vars above
 
      let previousDay = "";
-
+     let indexI = 0;
      response.list.forEach((element) => {
+      //card-img-top0 is the image area of card
+      //card-text0 is the text area of card
+      //THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
        //whats up with elemtn
        const day = dayjs(element.dt_txt).format('dddd');
        if (day != previousDay){
         //get vals you need from element 
         //only console day 1 each time the day changes...
+         console.log(element);
          console.log(day);
          previousDay = day;
+        if (indexI  == 0){
+          $(".card-text0").text(element.weather[0].description);
+        }
+        else if (indexI == 1){
+          $(".card-text1").text(element.weather[0].description);
+        }
+        else if (indexI == 2){
+          $(".card-text2").text(element.weather[0].description);
+        }
+        else if (indexI == 3){
+          $(".card-text3").text(element.weather[0].description);
+        }
+        else if (indexI == 4){
+          $(".card-text4").text(element.weather[0].description);
+        }
+         indexI ++;
+         //weather[0].main = clear windy etc
+         //weather[0].description
+         //main.temp 
+         //main.humidity
+        
+        //  for (i = 0 ; i < 4; i++){
+        //    if (i ==0){
+        //     $(".card-text0").text(element.weather[0].description);
+        //    }
+        //    else if (i = 1){
+        //     $(".card-text1").text(element.weather[0].description);
+        //    }
+        //    else if (i = 2){
+        //     $(".card-text2").text(element.weather[0].description);
+        //   }
+        //   else if (i = 3){
+        //     $(".card-text3").text(element.weather[0].description);
+        //   }
+        //   else if (i = 4){
+        //     $(".card-text4").text(element.weather[0].description);
+        //   }
+        //  }
+         
        }
-       
+
      });
        
      getUVI(lati, long);
@@ -103,10 +111,40 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       method: "GET"
     })
       .then(function(response){
-        console.log(response);
+        //console.log(response);
         $("#uvi").text("UV Index: " + response.current.uvi); 
       })
   }
+
+  //this here below is so important doesnt work if you have 
+  //.list-group-items and no li as a second parameter WHY!?
+  //event delegation 
+  //attach a click event listener to the list group 
+  //the function event wont fire unless you literally click on a li
+  //inputs and buttons only have val();!!!!.
+  $(".list-group").on("click", "li", function(event){
+    //when they click on a past ietm load it up baby!
+    //why does this not work for newly added rows... is it val or what 
+    //console.log(event);
+    $("#search-input").val($(this).text());//set the val of search area
+    getWeather();//update with this city
+  });
+
+ $("#search-button").on("click", function(Event){
+   var tagit = $("<li>");//create a li item
+
+   tagit.attr("class", "new-item");
+   tagit.addClass("list-group-item");
+   
+   var t = $("#search-input").val();
+
+   tagit.text(t);
+
+   $(".list-group").append(tagit);  //<li class="list-group-item">Boston</li>
+  // console.log(tagit);
+
+   getWeather();
+ });
 
 //maybe a long shit show of $() for recalling the curent and 5 day weather from local storage goes here.
   initThis();
@@ -119,7 +157,13 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
 
 
 
-
+//the json return object has the following 
+ //0 index = today
+ //5 = noon next day
+ //13 noon 2 days out
+ //21 noon 3 days out
+ //29 noon 4 days out 
+ //37 noon 5th day out
 
 
 
