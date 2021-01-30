@@ -54,48 +54,38 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
        if (day != previousDay){
         //get vals you need from element 
         //only console day 1 each time the day changes...
-         console.log(element);
-         console.log(day);
          previousDay = day;
         if (indexI  == 0){
-          $(".card-text0").text(element.weather[0].description);
+          $(".card-text0").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
+          //http://openweathermap.org/img/wn/10d@2x.png
+          var icoPresent = element.weather[0].icon;
+          $(".card-img-top0").attr("src","http://openweathermap.org/img/wn/" + icoPresent + "@2x.png");
         }
         else if (indexI == 1){
-          $(".card-text1").text(element.weather[0].description);
+          $(".card-text1").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
+          var icoOne = element.weather[0].icon;
+          $(".card-img-top1").attr("src","http://openweathermap.org/img/wn/" + icoOne + "@2x.png");
         }
         else if (indexI == 2){
-          $(".card-text2").text(element.weather[0].description);
+          $(".card-text2").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
+          var icoTwo = element.weather[0].icon;
+          $(".card-img-top2").attr("src","http://openweathermap.org/img/wn/" + icoTwo + "@2x.png");
         }
         else if (indexI == 3){
-          $(".card-text3").text(element.weather[0].description);
+          $(".card-text3").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
+          var icoThree = element.weather[0].icon;
+          $(".card-img-top3").attr("src","http://openweathermap.org/img/wn/" + icoThree + "@2x.png");
         }
         else if (indexI == 4){
-          $(".card-text4").text(element.weather[0].description);
+          $(".card-text4").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
+          var icoFour = element.weather[0].icon;
+          $(".card-img-top4").attr("src","http://openweathermap.org/img/wn/" + icoFour + "@2x.png");
         }
          indexI ++;
          //weather[0].main = clear windy etc
          //weather[0].description
          //main.temp 
          //main.humidity
-        
-        //  for (i = 0 ; i < 4; i++){
-        //    if (i ==0){
-        //     $(".card-text0").text(element.weather[0].description);
-        //    }
-        //    else if (i = 1){
-        //     $(".card-text1").text(element.weather[0].description);
-        //    }
-        //    else if (i = 2){
-        //     $(".card-text2").text(element.weather[0].description);
-        //   }
-        //   else if (i = 3){
-        //     $(".card-text3").text(element.weather[0].description);
-        //   }
-        //   else if (i = 4){
-        //     $(".card-text4").text(element.weather[0].description);
-        //   }
-        //  }
-         
        }
 
      });
