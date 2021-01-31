@@ -19,10 +19,16 @@ Weather app homework
     Using the jQuery API.
     USing the Bootstrap api.
     Using the https://api.openweathermap.org/data/2.5/forecast?q= api for weather.
+    
 
-![Weather Dashboard App]('WeatherHW_PFD.jpg')
+Mock Up
+
+
+![Weather Dashboard App](WeatherHW_PFD.jpg)
+
 
 Links
+
 
 Repo
 https://pfdemarco.github.io/Weather/
