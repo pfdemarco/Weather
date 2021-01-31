@@ -51,7 +51,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       $("#wind").text("Wind Speed: " + response.list[0].wind.speed + "MPH");
       window.localStorage.setItem("Wind Speed: " , "Wind Speed: " + response.list[0].wind.speed + "MPH");
 
-     // console.log(response);
+     console.log(response);
       const lati = response.city.coord.lat;
       const long = response.city.coord.lon;
       //now go get UV Index from the one call api using the vars above
@@ -64,15 +64,16 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       //THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
        //whats up with elemtn
        const day = dayjs(element.dt_txt).format('dddd');
-       const dateDisp = dayjs(element.dt_txt).format('MM-DD-YYYY');
+       const dateDisp = dayjs(element.dt_txt).format('MM-DD-YYYY hh:mm:ss');
        if (day != previousDay){
         //get vals you need from element 
         //only console day 1 each time the day changes...
         //im better than this lather rinse repeat just busy man.... 
          previousDay = day;
-         let strCond = dateDisp + " " + day + " Conditions: " + element.weather[0].description + " Temp: " + element.main.temp + " Humidity: " + element.main.humidity;
+         let strCond = day + " " + element.dt_txt + " Conditions: " + element.weather[0].description + " Temp: " + element.main.temp + " Humidity: " + element.main.humidity;
          let icoPic = "http://openweathermap.org/img/wn/" + element.weather[0].icon + ".png";
          
+         console.log(element);
         if (indexI  == 0){
           $(".card-text0").text(strCond);
           $(".card-img-top0").attr("src",icoPic);
