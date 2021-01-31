@@ -7,6 +7,16 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
      $("#temp").text(window.localStorage.getItem("Temp: "));
      $("#humid").text(window.localStorage.getItem("Humidity: "));
      $("#wind").text(window.localStorage.getItem("Wind Speed: "));
+     $(".card-text0").text(window.localStorage.getItem("Day0Cond"));
+     $(".card-img-top0").attr("src",window.localStorage.getItem("Day0Icon"));
+     $(".card-text1").text(window.localStorage.getItem("Day1Cond"));
+     $(".card-img-top1").attr("src",window.localStorage.getItem("Day1Icon"));
+     $(".card-text2").text(window.localStorage.getItem("Day2Cond"));
+     $(".card-img-top2").attr("src",window.localStorage.getItem("Day2Icon"));
+     $(".card-text3").text(window.localStorage.getItem("Day3Cond"));
+     $(".card-img-top3").attr("src",window.localStorage.getItem("Day3Icon"));
+     $(".card-text4").text(window.localStorage.getItem("Day4Cond"));
+     $(".card-img-top4").attr("src",window.localStorage.getItem("Day4Icon"));
    }
     
   };
@@ -54,37 +64,43 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
        if (day != previousDay){
         //get vals you need from element 
         //only console day 1 each time the day changes...
+        //im better than this lather rinse repeat just busy man.... 
          previousDay = day;
+         let strCond = day + "\r\nConditions: " + element.weather[0].description + " \r\nTemp " + element.main.temp + " \r\nHumidity " + element.main.humidity;
+         let icoPic = "http://openweathermap.org/img/wn/" + element.weather[0].icon + ".png";
+         
         if (indexI  == 0){
-          $(".card-text0").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
-          var icoPresent = element.weather[0].icon;
-          $(".card-img-top0").attr("src","http://openweathermap.org/img/wn/" + icoPresent + "@2x.png");
+          $(".card-text0").text(strCond);
+          $(".card-img-top0").attr("src",icoPic);
+          window.localStorage.setItem("Day0Cond", strCond);
+          window.localStorage.setItem("Day0Icon", icoPic);
         }
         else if (indexI == 1){
-          $(".card-text1").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
-          var icoOne = element.weather[0].icon;
-          $(".card-img-top1").attr("src","http://openweathermap.org/img/wn/" + icoOne + "@2x.png");
+          $(".card-text1").text(strCond);
+          $(".card-img-top1").attr("src", icoPic);
+          window.localStorage.setItem("Day1Cond", strCond);
+          window.localStorage.setItem("Day1Icon", icoPic);
         }
         else if (indexI == 2){
-          $(".card-text2").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
-          var icoTwo = element.weather[0].icon;
-          $(".card-img-top2").attr("src","http://openweathermap.org/img/wn/" + icoTwo + "@2x.png");
+          $(".card-text2").text(strCond);
+          $(".card-img-top2").attr("src", icoPic);
+          window.localStorage.setItem("Day2Cond", strCond);
+          window.localStorage.setItem("Day2Icon", icoPic);
         }
         else if (indexI == 3){
-          $(".card-text3").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
-          var icoThree = element.weather[0].icon;
-          $(".card-img-top3").attr("src","http://openweathermap.org/img/wn/" + icoThree + "@2x.png");
+          $(".card-text3").text(strCond);
+          $(".card-img-top3").attr("src", icoPic);
+          window.localStorage.setItem("Day3Cond", strCond);
+          window.localStorage.setItem("Day3Icon", icoPic);
         }
         else if (indexI == 4){
-          $(".card-text4").text(day + "Conditions: " + element.weather[0].description + " Temp " + element.main.temp + " Humidity " + element.main.humidity);
-          var icoFour = element.weather[0].icon;
-          $(".card-img-top4").attr("src","http://openweathermap.org/img/wn/" + icoFour + "@2x.png");
+          $(".card-text4").text(strCond);
+          $(".card-img-top4").attr("src", icoPic);
+          window.localStorage.setItem("Day4Cond", strCond);
+          window.localStorage.setItem("Day4Icon", icoPic);
         }
          indexI ++;
-         //weather[0].main = clear windy etc
-         //weather[0].description
-         //main.temp 
-         //main.humidity
+         
        }
 
      });
