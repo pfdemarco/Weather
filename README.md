@@ -20,7 +20,7 @@ Weather app homework
     USing the Bootstrap api.
     Using the https://api.openweathermap.org/data/2.5/forecast?q= api for weather.
 
-![Weather Dashboard App]('WeatherHW_PFD.jpg)
+![Weather Dashboard App]('WeatherHW_PFD.jpg')
 
 Links
 
