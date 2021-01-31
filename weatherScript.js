@@ -64,12 +64,13 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       //THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
        //whats up with elemtn
        const day = dayjs(element.dt_txt).format('dddd');
+       const dateDisp = dayjs(element.dt_txt).format('MM-DD-YYYY');
        if (day != previousDay){
         //get vals you need from element 
         //only console day 1 each time the day changes...
         //im better than this lather rinse repeat just busy man.... 
          previousDay = day;
-         let strCond = day + "Conditions: " + element.weather[0].description + " Temp: " + element.main.temp + " Humidity: " + element.main.humidity;
+         let strCond = dateDisp + " " + day + " Conditions: " + element.weather[0].description + " Temp: " + element.main.temp + " Humidity: " + element.main.humidity;
          let icoPic = "http://openweathermap.org/img/wn/" + element.weather[0].icon + ".png";
          
         if (indexI  == 0){
