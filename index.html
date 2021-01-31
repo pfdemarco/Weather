@@ -55,8 +55,25 @@
     #cityDate{
       font-size: xx-large;
     }
+    .card{
+      width:100px;
+      height:300px;
+    }
   </style>
 </head>
+<!--GIVEN a weather dashboard with form inputs
+    WHEN I search for a city
+    THEN I am presented with current and future conditions for that city and that city is added to the search history
+    WHEN I view current weather conditions for that city
+    THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
+    WHEN I view the UV index
+    THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+    WHEN I view future weather conditions for that city
+    THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
+    WHEN I click on a city in the search history
+    THEN I am again presented with current and future conditions for that city
+    WHEN I open the weather dashboard
+    THEN I am presented with the last searched city forecast-->
 <body>
   
   <header id="headr">Weather Dashboard</header>
@@ -93,28 +110,7 @@
         <div id="uvi"></div>
   
         <h4>5-Day Forecast:</h4>
-        <!--<div class="mainIcon"><img src=# /></div>-->
-
-
-
-
-        <!--GIVEN a weather dashboard with form inputs
-        WHEN I search for a city
-        THEN I am presented with current and future conditions for that city and that city is added to the search history
-        WHEN I view current weather conditions for that city
-        THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index
-        WHEN I view the UV index
-        THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-        WHEN I view future weather conditions for that city
-        THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, and the humidity
-        WHEN I click on a city in the search history
-        THEN I am again presented with current and future conditions for that city
-        WHEN I open the weather dashboard
-        THEN I am presented with the last searched city forecast-->
-
-
-
-          
+        <!--<div class="mainIcon"><img src=# /></div>-->          
         <div class="card" style="width: 18rem;">
           <img src="..." class="card-img-top0" alt="...">
           <div class="card-body">
@@ -144,17 +140,7 @@
           <div class="card-body">
             <p class="card-text4"></p>
           </div>
-        </div>
-
-
-
-
-
-
-
-
-
-        
+        </div>        
       </div>
     </div>
   </div>
