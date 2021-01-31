@@ -2,6 +2,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
 
   function initThis(){
    // getWeather();
+   //should do some logic checking on this but for each one? 
    if (window.localStorage.length != 0){
      $("#cityDate").text(window.localStorage.getItem("Descr"));
      $("#temp").text(window.localStorage.getItem("Temp: "));
@@ -17,6 +18,8 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
      $(".card-img-top3").attr("src",window.localStorage.getItem("Day3Icon"));
      $(".card-text4").text(window.localStorage.getItem("Day4Cond"));
      $(".card-img-top4").attr("src",window.localStorage.getItem("Day4Icon"));
+     $("#uvi").text("UV Index: " + window.localStorage.getItem("uvVal")); 
+     $("#uvi").css("color", window.localStorage.getItem("uvColor"));
    }
     
   };
@@ -66,7 +69,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
         //only console day 1 each time the day changes...
         //im better than this lather rinse repeat just busy man.... 
          previousDay = day;
-         let strCond = day + "\r\nConditions: " + element.weather[0].description + " \r\nTemp " + element.main.temp + " \r\nHumidity " + element.main.humidity;
+         let strCond = day + "Conditions: " + element.weather[0].description + " Temp: " + element.main.temp + " Humidity: " + element.main.humidity;
          let icoPic = "http://openweathermap.org/img/wn/" + element.weather[0].icon + ".png";
          
         if (indexI  == 0){
@@ -124,14 +127,18 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
         //>=10 very high
         var uvI = response.current.uvi;
         $("#uvi").text("UV Index: " + response.current.uvi); 
+        window.localStorage.setItem("uvVal", uvI);
         if (uvI >= 0 && uvI <= 4){
           $("#uvi").css("color", "green");
+          window.localStorage.setItem("uvColor", "green");
         }
         else if (uvI >= 5 && uvI <= 6){
           $("#uvi").css("color", "orange");
+          window.localStorage.setItem("uvColor", "orange");
         }
         else if (uvI >= 7){
           $("#uvi").css("color", "red");
+          window.localStorage.setItem("uvColor", "red");
         }
       })
   }
