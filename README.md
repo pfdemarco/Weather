@@ -31,7 +31,7 @@ Links
 
 
 Repo
-https://pfdemarco.github.io/Weather/
+https://pfdemarco.github.io/Weather
 
 
 Website
