@@ -4,6 +4,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
    // getWeather();
    //should do some logic checking on this but for each one? 
    if (window.localStorage.length != 0){
+    $("#search-input").val(window.localStorage.getItem("City"));
      $("#cityDate").text(window.localStorage.getItem("Descr"));
      $("#temp").text(window.localStorage.getItem("Temp: "));
      $("#humid").text(window.localStorage.getItem("Humidity: "));
@@ -48,6 +49,7 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
       //populate right side with teh json object returned
       $("#cityDate").text("Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
       window.localStorage.setItem("Descr" , "Currently in " + response.city.name + " its " + response.list[0].weather[0].description + " today.");
+      window.localStorage.setItem("City" , sIn);
       $("#temp").text("Temp: " + response.list[0].main.temp +"F");
       window.localStorage.setItem("Temp: " , "Temp: " + response.list[0].main.temp +"F");
       $("#humid").text("Humidity: " + response.list[0].main.humidity + "%");
