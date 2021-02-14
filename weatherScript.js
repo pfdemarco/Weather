@@ -21,6 +21,10 @@ $(document).ready(function() {//dont forget this cause it will ruin your day
      $("#uvi").text("UV Index: " + window.localStorage.getItem("uvVal")); 
      $("#uvi").css("color", window.localStorage.getItem("uvColor"));
    }
+   else { 
+    $("#search-input").val("troy,ny");
+    getWeather();
+   }
     
   };
 
