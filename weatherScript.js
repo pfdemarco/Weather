@@ -1,30 +1,30 @@
 $(document).ready(function() {//dont forget this cause it will ruin your day
 
   function initThis(){
-   // getWeather();
    //should do some logic checking on this but for each one? 
-   if (window.localStorage.length != 0){
-    $("#search-input").val(window.localStorage.getItem("City"));
-     $("#cityDate").text(window.localStorage.getItem("Descr"));
-     $("#temp").text(window.localStorage.getItem("Temp: "));
-     $("#humid").text(window.localStorage.getItem("Humidity: "));
-     $("#wind").text(window.localStorage.getItem("Wind Speed: "));
-     $(".card-text0").text(window.localStorage.getItem("Day0Cond"));
-     $(".card-img-top0").attr("src",window.localStorage.getItem("Day0Icon"));
-     $(".card-text1").text(window.localStorage.getItem("Day1Cond"));
-     $(".card-img-top1").attr("src",window.localStorage.getItem("Day1Icon"));
-     $(".card-text2").text(window.localStorage.getItem("Day2Cond"));
-     $(".card-img-top2").attr("src",window.localStorage.getItem("Day2Icon"));
-     $(".card-text3").text(window.localStorage.getItem("Day3Cond"));
-     $(".card-img-top3").attr("src",window.localStorage.getItem("Day3Icon"));
-     $(".card-text4").text(window.localStorage.getItem("Day4Cond"));
-     $(".card-img-top4").attr("src",window.localStorage.getItem("Day4Icon"));
-     $("#uvi").text("UV Index: " + window.localStorage.getItem("uvVal")); 
-     $("#uvi").css("color", window.localStorage.getItem("uvColor"));
-   }
-   else { 
+  if (window.localStorage.getItem("City") == null){
     $("#search-input").val("troy,ny");
     getWeather();
+   }
+   else { 
+    //this gets everything and does magic
+    $("#search-input").val(window.localStorage.getItem("City"));
+    $("#cityDate").text(window.localStorage.getItem("Descr"));
+    $("#temp").text(window.localStorage.getItem("Temp: "));
+    $("#humid").text(window.localStorage.getItem("Humidity: "));
+    $("#wind").text(window.localStorage.getItem("Wind Speed: "));
+    $(".card-text0").text(window.localStorage.getItem("Day0Cond"));
+    $(".card-img-top0").attr("src",window.localStorage.getItem("Day0Icon"));
+    $(".card-text1").text(window.localStorage.getItem("Day1Cond"));
+    $(".card-img-top1").attr("src",window.localStorage.getItem("Day1Icon"));
+    $(".card-text2").text(window.localStorage.getItem("Day2Cond"));
+    $(".card-img-top2").attr("src",window.localStorage.getItem("Day2Icon"));
+    $(".card-text3").text(window.localStorage.getItem("Day3Cond"));
+    $(".card-img-top3").attr("src",window.localStorage.getItem("Day3Icon"));
+    $(".card-text4").text(window.localStorage.getItem("Day4Cond"));
+    $(".card-img-top4").attr("src",window.localStorage.getItem("Day4Icon"));
+    $("#uvi").text("UV Index: " + window.localStorage.getItem("uvVal")); 
+    $("#uvi").css("color", window.localStorage.getItem("uvColor"));
    }
     
   };
